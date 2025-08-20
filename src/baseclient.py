@@ -2,6 +2,13 @@ from aiohttp import ClientSession
 
 class BaseClient:
     def __init__(self, api_url: str, token: str = ""):
+        """
+        Базовый класс для запросов по Ednpoint
+
+        Args:
+            api_url (str): API URL (может изменяться)
+            token (str, optional): JWT токен. Defaults to "".
+        """
         self.api_url = api_url
         self.token = token
 
@@ -20,7 +27,7 @@ class BaseClient:
         if not self.session:
             await self.start()
 
-        url = f"{self.api_url}/api/{endpoint.lstrip('/')}"
+        url = f"{self.api_url}/api/remap/1.2/entity/{endpoint.lstrip('/')}"
         
         headers = {}
         if self.token:
