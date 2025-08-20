@@ -17,6 +17,11 @@ class BaseClient(AuthManager):
         self.api_url = api_url
         self.session: ClientSession | None = None
 
+        self.headers = {
+            "Content-Type": "application/json",
+            "Accept-Encoding": "gzip"
+        }
+
     async def start(self):
         if not self.session:
             self.session = ClientSession()
@@ -34,10 +39,12 @@ class BaseClient(AuthManager):
             await self.start()
 
         url = f"{self.api_url.rstrip('/')}/{endpoint.lstrip('/')}"
-        headers = {}
+        headers = self.headers.copy()
+
         if self.token:
             headers["Authorization"] = f"Bearer {self.token}"
 
         async with self.session.request(method=method.upper(), url=url, json=data, headers=headers) as resp:
             resp.raise_for_status()
+            
             return await resp.json()

@@ -1,5 +1,4 @@
 from src.baseclient import BaseClient
-from src.models.product import Product
 
 from typing import List
 
@@ -8,8 +7,19 @@ class Assortment:
         self.base = base
         self.prefix = "assortment"
 
-    async def get_assortiment(self) -> List[Product]:
+
+    async def get_assortment(self) -> list[dict]:
         response = await self.base.request(
             endpoint=f"{self.prefix}", method="GET"
             )
         return response
+
+    async def delete_assortment(self, items: list[dict]) -> dict:
+        response = await self.base.request(
+            endpoint=f"{self.prefix}/delete", 
+            method="POST",
+            data=items
+        )
+        return response
+    
+    
