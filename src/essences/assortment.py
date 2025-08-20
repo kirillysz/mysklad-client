@@ -1,4 +1,6 @@
 from src.baseclient import BaseClient
+from src.models.product import Product
+
 from typing import List
 
 class Assortment:
@@ -6,7 +8,7 @@ class Assortment:
         self.base = base
         self.prefix = "assortment"
 
-    async def get_assortiment(self):
+    async def get_assortiment(self) -> List[Product]:
         response = await self.base.request(
             endpoint=f"{self.prefix}", method="GET"
             )

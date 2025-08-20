@@ -1,4 +1,6 @@
 from aiohttp import ClientSession
+from typing import Any
+
 from src.auth.authmanager import AuthManager
 
 class BaseClient(AuthManager):

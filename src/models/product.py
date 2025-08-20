@@ -1,6 +1,7 @@
 from pydantic import BaseModel, UUID4
 from typing import List, Optional
-from models.base import Meta, OwnerGroup, Price, UOM, ImageList
+
+from src.models.base import Meta, OwnerGroup, Price, UOM, ImageList
 
 class CounterParty(BaseModel):
     meta: Meta
